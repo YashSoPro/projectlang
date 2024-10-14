@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // English to Code translation
     if (translateBtn) {
         translateBtn.onclick = () => {
-            const english = englishCode.value; // Use .value to get user input
+            const english = englishCode.textContent; // Get English code
             const java = translateToCode(english);
             javaCode.textContent = java;
         }
