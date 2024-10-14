@@ -3,51 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectLang</title>
+    <title>ProjectLang - Home</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="light"> <!-- Default theme is light -->
-    <div class="sidebar">
-        <h3>ProjectLang</h3>
-        <button onclick="showEditor()">Editor</button>
-        <button onclick="showSettings()">Settings</button>
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <div class="container">
-        <div id="login-form" class="form-container">
-            <h2>Login or Sign Up</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <button onclick="login()">Login</button>
-            <button onclick="signup()">Sign Up</button>
-            <p id="login-status"></p>
-        </div>
-
-        <div id="code-editor" class="form-container" style="display:none;">
-            <h3>Code Editor</h3>
-            <textarea id="code" rows="10" placeholder="Write your code here..."></textarea>
-            <button onclick="saveCode()">Save Code</button>
-            <button onclick="loadCode()">Load Saved Code</button>
-            <button onclick="runCode()">Run Code</button>
-            <h3>Translated Code</h3>
-            <pre id="translatedCode"></pre>
-            <h3>Output</h3>
-            <pre id="output"></pre>
-        </div>
-
-        <div id="settings" class="form-container" style="display:none;">
-            <h3>Settings</h3>
-            <label for="theme">Select Theme:</label>
-            <select id="theme" onchange="changeTheme()">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
-        </div>
-    </div>
-
+<body class="light">
+    <header>
+        <h1>Welcome to ProjectLang</h1>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Translate Your English to Code!</h2>
+        <p>Create an account to start coding in your own language.</p>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
