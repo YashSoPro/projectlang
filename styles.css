@@ -1,0 +1,155 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #eaeaea; /* Light theme default */
+    color: #333; /* Light theme text color */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #2c3e50; /* Dark sidebar */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar h3 {
+    text-align: center;
+}
+
+.sidebar button {
+    width: 100%;
+    background-color: #34495e;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar button:hover {
+    background-color: #1abc9c;
+}
+
+.container {
+    margin-left: 220px;
+    padding: 20px;
+    width: calc(100% - 220px);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-container {
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #4CAF50;
+}
+
+label {
+    margin-top: 10px;
+    display: block;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Output Styles */
+pre {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+#status {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Dark Theme Styles */
+body.dark {
+    background-color: #2c3e50; /* Dark background */
+    color: #ecf0f1; /* Light text color */
+}
+
+body.dark .sidebar {
+    background-color: #34495e; /* Darker sidebar */
+}
+
+body.dark .sidebar button {
+    background-color: #2c3e50; /* Dark button */
+}
+
+body.dark .container {
+    background: #34495e; /* Dark container */
+    color: #ecf0f1; /* Light text in container */
+}
+
+body.dark h2, body.dark h3 {
+    color: #4CAF50; /* Keeping header color */
+}
+
+body.dark input[type="text"],
+body.dark input[type="password"],
+body.dark textarea,
+body.dark select {
+    background-color: #4c565c; /* Dark input background */
+    color: #ecf0f1; /* Light text in inputs */
+    border: 1px solid #555; /* Darker border */
+}
+
+body.dark button {
+    background-color: #4CAF50; /* Keeping button color */
+}
+
+body.dark pre {
+    background-color: #555; /* Dark output background */
+    color: #ecf0f1; /* Light text in output */
+}
