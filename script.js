@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const translateBtn = document.getElementById('translateBtn');
-    const runBtn = document.getElementById('runBtn');
-    const englishCode = document.getElementById('englishCode');
     const javaCode = document.getElementById('javaCode');
-    const outputArea = document.getElementById('outputArea');
+    const englishCode = document.getElementById('englishCode');
 
     // Modal button click events
     loginBtn.onclick = () => loginModal.style.display = "block";
@@ -29,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target == signupModal) signupModal.style.display = "none";
     }
 
-    // Form submission
+    // Form submission for Login
     loginForm.onsubmit = (e) => {
         e.preventDefault();
         const email = document.getElementById('loginEmail').value;
@@ -46,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Form submission for Sign Up
     signupForm.onsubmit = (e) => {
         e.preventDefault();
         const username = document.getElementById('signupUsername').value;
@@ -73,17 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // English to Code translation
     if (translateBtn) {
         translateBtn.onclick = () => {
-            const english = englishCode.textContent; // Get English code
+            const english = englishCode.value; // Use .value to get the input
             const java = translateToCode(english);
-            javaCode.textContent = java;
-        }
-    }
-
-    if (runBtn) {
-        runBtn.onclick = () => {
-            const java = javaCode.textContent;
-            const output = simulateRun(java);
-            outputArea.textContent = output;
+            javaCode.textContent = java; // Ensure this refers to the correct output element
         }
     }
 
@@ -121,22 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return javaCode;
     }
 
-    function simulateRun(javaCode) {
-        // This is a very simple simulation and won't actually run the code
-        // In a real implementation, you'd need a proper Java interpreter
-        let output = "Simulated output:\n";
-        const printMatches = javaCode.match(/System\.out\.println\(".*?"\)/g);
-        if (printMatches) {
-            printMatches.forEach(match => {
-                const content = match.match(/"(.*?)"/)[1];
-                output += content + "\n";
-            });
-        } else {
-            output += "No output generated.";
-        }
-        return output;
-    }
-
     function updateNavForLoggedInUser(username) {
         const navLinks = document.querySelector('.nav-links');
         navLinks.innerHTML = `
@@ -152,6 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="#" id="loginBtn" class="btn btn-primary">Login</a>
             <a href="#" id="signupBtn" class="btn btn-secondary">Sign Up</a>
         `;
-        location.reload();
+        alert('Logged out successfully.');
     }
 });
