@@ -1,5 +1,28 @@
 // Simple localStorage-based login system
 
+// Show the code editor
+function showEditor() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('code-editor').style.display = 'block';
+    document.getElementById('settings').style.display = 'none';
+}
+
+// Show the settings
+function showSettings() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('code-editor').style.display = 'none';
+    document.getElementById('settings').style.display = 'block';
+}
+
+// Logout function
+function logout() {
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('code-editor').style.display = 'none';
+    document.getElementById('settings').style.display = 'none';
+}
+
 // Sign up function
 function signup() {
     const username = document.getElementById('username').value;
@@ -36,162 +59,93 @@ function login() {
 
     if (parsedData.password === password) {
         // Successful login
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('code-editor').style.display = 'block';
         document.getElementById('currentUser').textContent = username;
-        loadCode(); // Load code automatically on login
+        showEditor(); // Show the code editor upon successful login
+        loadCode(); // Load any saved code upon login
     } else {
-        alert('Incorrect password.');
+        alert('Incorrect password. Please try again.');
     }
 }
 
 // Save code function
 function saveCode() {
-    const username = document.getElementById('currentUser').textContent;
+    const username = document.getElementById('username').value;
     const code = document.getElementById('code').value;
 
-    // Retrieve the user data, update the code, and save back to localStorage
-    const userData = JSON.parse(localStorage.getItem(username));
-    userData.code = code;
-    localStorage.setItem(username, JSON.stringify(userData));
+    if (username === '') {
+        alert('Please log in to save your code.');
+        return;
+    }
 
-    document.getElementById('status').textContent = 'Code saved successfully!';
+    const userData = localStorage.getItem(username);
+    const parsedData = JSON.parse(userData);
+    parsedData.code = code;
+
+    // Update user data in localStorage
+    localStorage.setItem(username, JSON.stringify(parsedData));
+    alert('Code saved successfully!');
 }
 
-// Load saved code function
+// Load code function
 function loadCode() {
-    const username = document.getElementById('currentUser').textContent;
-    
-    // Retrieve the user data and load the saved code
-    const userData = JSON.parse(localStorage.getItem(username));
+    const username = document.getElementById('username').value;
 
-    document.getElementById('code').value = userData.code || '';
-    document.getElementById('status').textContent = 'Code loaded successfully!';
-    translateCode(); // Automatically translate loaded code
+    if (username === '') {
+        alert('Please log in to load your code.');
+        return;
+    }
+
+    const userData = localStorage.getItem(username);
+    const parsedData = JSON.parse(userData);
+    document.getElementById('code').value = parsedData.code || '';
 }
 
-// Function to run the interpreter and translate the code
-function runInterpreter() {
-    const input = document.getElementById('code').value.toLowerCase();
-    
-    // Translate the input to JavaScript
-    const translatedCode = translateToJavaScript(input);
-
-    // Display the translated code
+// Run code function
+function runCode() {
+    const code = document.getElementById('code').value;
+    const translatedCode = translateToJavaScript(code);
     document.getElementById('translatedCode').textContent = translatedCode;
 
-    // Run the translated code and display the output
+    // Execute the translated code and display output
+    let output = '';
     try {
-        const output = eval(translatedCode);
-        document.getElementById('output').textContent = output !== undefined ? output : 'Code executed successfully!';
-    } catch (error) {
-        document.getElementById('output').textContent = 'Error: ' + error.message;
+        eval(translatedCode);
+    } catch (e) {
+        output = e.message; // Capture any errors during execution
     }
+    document.getElementById('output').textContent = output;
 }
 
-// Translate input from natural language to JavaScript code
-function translateToJavaScript(input) {
-    const lines = input.split('\n');
+// Translate natural language to JavaScript code
+function translateToJavaScript(code) {
+    const lines = code.split('\n');
     let jsCode = '';
 
-    lines.forEach(line => {
-        // Variable Assignment: "set x to 5"
-        if (line.startsWith('set')) {
-            const match = line.match(/set (\w+) to (.+)/);
-            if (match) {
-                const variable = match[1];
-                const value = convertToJSExpression(match[2]);
-                jsCode += `let ${variable} = ${value};\n`;
-            }
+    for (let line of lines) {
+        line = line.trim();
+        if (line.startsWith('if')) {
+            const condition = line.match(/if (.+?) than/)[1];
+            const action = line.match(/than (.+)/)[1];
+            jsCode += `if (${translateCondition(condition)}) {\n`;
+            jsCode += `    ${parseAction(action)}\n`;
+            jsCode += '}\n';
+        } else {
+            jsCode += parseAction(line) + '\n';
         }
-
-        // Conditional: "if age is greater than 18 than print You are an adult"
-        else if (line.startsWith('if')) {
-            const match = line.match(/if (\w+) is (greater than|less than|equal to) (.+) than (.+)/);
-            if (match) {
-                const variable = match[1];
-                const operator = match[2];
-                const value = convertToJSExpression(match[3]);
-                const action = match[4];
-                const jsOperator = translateOperator(operator);
-
-                jsCode += `if (${variable} ${jsOperator} ${value}) {\n${parseAction(action)}\n}\n`;
-            }
-        }
-
-        // Print Statement: "print Hello {name}"
-        else if (line.startsWith('print')) {
-            const message = line.match(/print (.+)/)[1];
-            const jsMessage = message.replace(/\{(\w+)\}/g, '"+ $1 +"');
-            jsCode += `console.log("${jsMessage}");\n`;
-        }
-
-        // Loops: "repeat 5 times print Hello"
-        else if (line.startsWith('repeat')) {
-            const match = line.match(/repeat (\d+) times (.+)/);
-            if (match) {
-                const count = parseInt(match[1], 10);
-                const action = match[2];
-                jsCode += `for (let i = 0; i < ${count}; i++) {\n${parseAction(action)}\n}\n`;
-            }
-        }
-
-        // Function Definition: "define a function greet with name"
-        else if (line.startsWith('define a function')) {
-            const match = line.match(/define a function (\w+) with (.+)/);
-            if (match) {
-                const functionName = match[1];
-                const params = match[2].split(' and ').join(', ');
-                jsCode += `function ${functionName}(${params}) {\n`;
-            }
-        }
-
-        // Function End: "end function"
-        else if (line.startsWith('end function')) {
-            jsCode += `}\n`;
-        }
-
-        // Function Call: "call greet with John"
-        else if (line.startsWith('call')) {
-            const match = line.match(/call (\w+) with (.+)/);
-            if (match) {
-                const functionName = match[1];
-                const args = match[2].split(' and ').map(arg => `"${arg.trim()}"`).join(', ');
-                jsCode += `${functionName}(${args});\n`;
-            }
-        }
-
-        // Array: "set mylist to [1, 2, 3]"
-        else if (line.startsWith('set') && line.includes('[')) {
-            const match = line.match(/set (\w+) to \[(.+)\]/);
-            if (match) {
-                const variable = match[1];
-                const values = match[2];
-                jsCode += `let ${variable} = [${values}];\n`;
-            }
-        }
-
-        // Add to Array: "add 4 to mylist"
-        else if (line.startsWith('add')) {
-            const match = line.match(/add (\d+) to (\w+)/);
-            if (match) {
-                const value = match[1];
-                const array = match[2];
-                jsCode += `${array}.push(${value});\n`;
-            }
-        }
-
-        // Input: "ask for user's name"
-        else if (line.startsWith('ask for')) {
-            const variable = line.match(/ask for (.+)/)[1];
-            jsCode += `let ${variable} = prompt("Enter ${variable}:");\n`;
-        }
-    });
-
+    }
     return jsCode;
 }
 
-// Parse Action (for conditional blocks or loops)
+// Translate conditions to JavaScript conditions
+function translateCondition(condition) {
+    const parts = condition.split(' ');
+    const variable = parts[0]; // e.g., "age"
+    const operator = translateOperator(parts[1] + ' ' + parts[2]); // e.g., "equal to"
+    const value = parts[4]; // e.g., "15"
+    return `${variable} ${operator} ${value}`;
+}
+
+// Parse actions like print statements
 function parseAction(action) {
     if (action.startsWith('print')) {
         const message = action.match(/print (.+)/)[1];
@@ -199,13 +153,6 @@ function parseAction(action) {
         return `console.log("${jsMessage}");`;
     }
     return '';
-}
-
-// Convert natural language expression to JavaScript expressions
-function convertToJSExpression(expression) {
-    // You can expand this function to handle more complex expressions
-    if (!isNaN(expression)) return expression; // If it's a number
-    return `"${expression}"`; // Default to string
 }
 
 // Translate natural language operators to JavaScript operators
@@ -222,5 +169,8 @@ function translateOperator(operator) {
     }
 }
 
-// Function to run the interpreter and translate the code when the "Run" button is clicked
-document.getElementById('code').addEventListener('input', runInterpreter);
+// Change theme function
+function changeTheme() {
+    const theme = document.getElementById('theme').value;
+    document.body.className = theme; // Change body class based on selected theme
+}
