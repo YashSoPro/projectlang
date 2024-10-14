@@ -3,57 +3,51 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     display: flex;
+    flex-direction: column;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
     background-color: #eaeaea; /* Light theme default */
     color: #333; /* Light theme text color */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
-.sidebar {
-    width: 200px;
-    background-color: #2c3e50; /* Dark sidebar */
+header {
+    background-color: #4CAF50; /* Header color */
     color: white;
-    padding: 20px;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    height: 100%;
-}
-
-.sidebar h3 {
+    width: 100%;
+    padding: 15px 20px;
     text-align: center;
 }
 
-.sidebar button {
-    width: 100%;
-    background-color: #34495e;
+nav {
+    margin-top: 10px;
+}
+
+nav a {
     color: white;
-    border: none;
-    padding: 10px;
-    margin: 5px 0;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    margin: 0 15px;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-.sidebar button:hover {
-    background-color: #1abc9c;
+nav a:hover {
+    color: #1abc9c;
 }
 
-.container {
-    margin-left: 220px;
+main {
+    width: 100%;
     padding: 20px;
-    width: calc(100% - 220px);
+    text-align: center;
+}
+
+.form-container {
     background: white;
     border-radius: 8px;
+    padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Form Styles */
-.form-container {
-    margin-bottom: 20px;
-}
-
-h2, h3 {
-    color: #4CAF50;
+    width: 300px;
+    margin: 0 auto;
 }
 
 label {
@@ -62,9 +56,7 @@ label {
 }
 
 input[type="text"],
-input[type="password"],
-textarea,
-select {
+input[type="password"] {
     width: calc(100% - 20px);
     padding: 10px;
     border: 1px solid #ccc;
@@ -73,14 +65,11 @@ select {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus,
-textarea:focus,
-select:focus {
+input[type="password"]:focus {
     border-color: #4CAF50;
     outline: none;
 }
 
-/* Button Styles */
 button {
     background-color: #4CAF50;
     color: white;
@@ -97,59 +86,10 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Output Styles */
-pre {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    overflow-x: auto;
-    white-space: pre-wrap;
-}
-
-#status {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #4CAF50;
-}
-
 /* Dark Theme Styles */
 body.dark {
     background-color: #2c3e50; /* Dark background */
     color: #ecf0f1; /* Light text color */
 }
 
-body.dark .sidebar {
-    background-color: #34495e; /* Darker sidebar */
-}
-
-body.dark .sidebar button {
-    background-color: #2c3e50; /* Dark button */
-}
-
-body.dark .container {
-    background: #34495e; /* Dark container */
-    color: #ecf0f1; /* Light text in container */
-}
-
-body.dark h2, body.dark h3 {
-    color: #4CAF50; /* Keeping header color */
-}
-
-body.dark input[type="text"],
-body.dark input[type="password"],
-body.dark textarea,
-body.dark select {
-    background-color: #4c565c; /* Dark input background */
-    color: #ecf0f1; /* Light text in inputs */
-    border: 1px solid #555; /* Darker border */
-}
-
-body.dark button {
-    background-color: #4CAF50; /* Keeping button color */
-}
-
-body.dark pre {
-    background-color: #555; /* Dark output background */
-    color: #ecf0f1; /* Light text in output */
-}
+/* Add additional styling for dark theme and other elements if needed */
