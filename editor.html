@@ -4,30 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectLang - Code Editor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .CodeMirror {
+            height: auto;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
-<body class="light">
-    <header>
+<body>
+    <header class="bg-success text-white text-center p-4">
         <h1>ProjectLang Code Editor</h1>
         <nav>
-            <a href="login.html">Logout</a>
+            <a class="text-white mx-2" href="login.html">Logout</a>
         </nav>
     </header>
-    <main>
+    <main class="container mt-5">
         <div class="editor-container">
             <h2>Your Code</h2>
-            <textarea id="code" rows="10" placeholder="Type your natural language code here..."></textarea>
-            <div class="buttons">
-                <button onclick="saveCode()">Save Code</button>
-                <button onclick="loadCode()">Load Code</button>
-                <button onclick="runCode()">Run Code</button>
+            <textarea id="code" placeholder="Type your natural language code here..."></textarea>
+            <div class="buttons mt-2">
+                <button class="btn btn-primary animated-button" onclick="saveCode()">Save Code</button>
+                <button class="btn btn-secondary animated-button" onclick="loadCode()">Load Code</button>
+                <button class="btn btn-success animated-button" onclick="runCode()">Run Code</button>
             </div>
             <h2>Translated JavaScript Code</h2>
-            <pre id="translatedCode"></pre>
+            <pre id="translatedCode" class="border p-2"></pre>
             <h2>Output</h2>
-            <pre id="output"></pre>
+            <pre id="output" class="border p-2"></pre>
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        const codeMirror = CodeMirror.fromTextArea(document.getElementById('code'), {
+            lineNumbers: true,
+            mode: 'javascript',
+            theme: 'default'
+        });
+    </script>
 </body>
 </html>
