@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code - ProjectLang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <h1>ProjectLang</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="btn btn-secondary">Home</a>
+                <a href="#" id="loginBtn" class="btn btn-primary">Login</a>
+                <a href="#" id="signupBtn" class="btn btn-secondary">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+    <main class="coding-interface">
+        <h2>Code in Plain English</h2>
+        <div class="code-editor">
+            <textarea id="englishCode" placeholder="Write your code in plain English here..."></textarea>
+            <button id="translateBtn" class="btn btn-primary">Translate</button>
+            <pre id="javaCode"></pre>
+        </div>
+        <div class="code-output">
+            <h3>Output</h3>
+            <pre id="outputArea"></pre>
+            <button id="runBtn" class="btn btn-secondary">Run Code</button>
+        </div>
+    </main>
+    <footer>
+        <p>ProjectLang - Programming made simple</p>
+        <p>&copy; 2024 ProjectLang. All rights reserved.</p>
+    </footer>
+    <!-- Login and Signup modals (same as in index.html) -->
+    <script src="script.js"></script>
+</body>
+</html>
