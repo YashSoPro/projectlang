@@ -1,61 +1,112 @@
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
-    background: linear-gradient(to right, #eaeaea, #d1d1d1);
-    color: #333;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header Styles */
 header {
-    width: 100%;
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
 }
 
-.editor-container {
-    padding: 20px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
 }
 
-h2 {
-    margin-top: 20px;
+header ul {
+    padding: 0;
+    list-style: none;
+}
+
+header li {
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    float: right;
+    margin-top: 10px;
 }
 
 /* Button Styles */
-.animated-button {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s;
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
 }
 
-.animated-button:hover {
-    transform: scale(1.05);
+.btn-primary {
+    background: #0779e4;
 }
 
-/* CodeMirror Styles */
-.CodeMirror {
-    height: auto;
-    border: 1px solid #ccc;
+.btn-secondary {
+    background: #6c757d;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+/* Form Styles */
+.form-container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
     border-radius: 5px;
-    margin-top: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-pre {
-    background: #f8f9fa;
-    border-radius: 5px;
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
     padding: 10px;
-    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .editor-container {
-        padding: 15px;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
+/* Footer Styles */
+footer {
+    padding: 20px;
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #333;
+    text-align: center;
 }
