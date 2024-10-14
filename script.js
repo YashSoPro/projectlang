@@ -1,44 +1,43 @@
-// Simple localStorage-based login system
+// Form validation
+document.addEventListener('DOMContentLoaded', (event) => {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
 
-function signup() {
-    const username = document.getElementById('new-username').value;
-    const password = document.getElementById('new-password').value;
-
-    if (username === '' || password === '') {
-        alert('Please fill in both fields.');
-        return;
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add login logic here
+            console.log('Login form submitted');
+        });
     }
 
-    // Check if user already exists
-    if (localStorage.getItem(username)) {
-        alert('Username already exists. Please choose a different username.');
-    } else {
-        // Store user credentials in localStorage
-        localStorage.setItem(username, JSON.stringify({ password: password, code: '' }));
-        alert('Sign-up successful! You can now log in.');
-        window.location.href = 'login.html'; // Redirect to login page
+    if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Add signup logic here
+            console.log('Signup form submitted');
+        });
     }
+});
+
+// English to Code translation (placeholder function)
+function translateToCode(englishCode) {
+    // This is a very basic placeholder. In a real implementation,
+    // you'd need a much more sophisticated parser and translator.
+    let javaCode = englishCode
+        .replace(/if (.*?), then (.*)/g, 'if ($1) {\n    $2;\n}')
+        .replace(/print '(.*?)'/g, 'System.out.println("$1")');
+
+    return javaCode;
 }
 
-// Login function
-function login() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    const userData = localStorage.getItem(username);
-
-    if (!userData) {
-        alert('Username not found. Please sign up.');
-        return;
-    }
-
-    const parsedData = JSON.parse(userData);
-
-    if (parsedData.password === password) {
-        // Successful login
-        alert('Login successful!');
-        window.location.href = 'editor.html'; // Redirect to the editor page
-    } else {
-        alert('Incorrect password. Please try again.');
-    }
-}
+// Example usage:
+console.log(translateToCode("if my age is greater than 18, then print 'I am an adult'"));
