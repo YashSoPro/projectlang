@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectLang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login or Sign Up</h2>
+    <div id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
+
+        <button onclick="login()">Login</button>
+        <button onclick="signup()">Sign Up</button>
+    </div>
+
+    <div id="code-editor" style="display:none;">
+        <h3>Welcome, <span id="currentUser"></span></h3>
+        <textarea id="code" rows="10" placeholder="Write your code here..."></textarea><br>
+        <button onclick="saveCode()">Save Code</button>
+        <button onclick="loadCode()">Load Saved Code</button>
+        <p id="status"></p>
+        <h3>Translated Code</h3>
+        <pre id="translatedCode"></pre>
+        <h3>Output</h3>
+        <pre id="output"></pre>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
