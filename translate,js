@@ -1,0 +1,22 @@
+function translateToJava(input) {
+    let javaCode = '';
+    input = input.toLowerCase();
+
+    if (input.includes("if") && input.includes("then")) {
+        const condition = input.split("then")[0].replace("if", "").trim();
+        const action = input.split("then")[1].trim();
+        javaCode += `if (${condition}) {\n\tSystem.out.println("${action.replace(/'/g, '\\"')}");\n}`;
+    } else if (input.includes("print")) {
+        const message = input.replace("print", "").trim().replace(/'/g, '\\"');
+        javaCode += `System.out.println("${message}");`;
+    } else if (input.includes("equals")) {
+        const parts = input.split("equals");
+        const left = parts[0].trim();
+        const right = parts[1].replace("four", "4").trim();
+        javaCode += `if (${left} == ${right}) {\n\tSystem.out.println("You are a mathematician");\n} else {\n\tSystem.out.println("You need practice");\n}`;
+    } else {
+        javaCode = "Translation not available for this input.";
+    }
+
+    return javaCode;
+}
