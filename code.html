@@ -1,69 +1,26 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Code Editor - ProjectLang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- Your CSS file -->
+    <title>Code Editor - ProjectLang</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <h1>ProjectLang</h1>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="btn btn-secondary">Home</a>
-                <a href="#" id="loginBtn" class="btn btn-primary">Login</a>
-                <a href="#" id="signupBtn" class="btn btn-secondary">Sign Up</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Editor Interface -->
-    <main class="coding-interface">
-        <!-- Sidebar for File Management -->
-        <aside class="sidebar">
-            <div class="file-manager">
-                <button id="newFileBtn" class="btn btn-small"><i class="fas fa-file"></i> New File</button>
-                <button id="newFolderBtn" class="btn btn-small"><i class="fas fa-folder-plus"></i> New Folder</button>
-            </div>
+    <div class="editor-container">
+        <aside class="file-explorer">
             <h3>File Explorer</h3>
             <ul id="fileList">
-                <!-- Files and folders will be dynamically added here -->
+                <!-- Dynamically added files will appear here -->
             </ul>
+            <button id="addFileBtn">Add File</button>
         </aside>
 
-        <!-- Editor and Output Panels -->
-        <div class="editor-container">
-            <div class="editor-tabs">
-                <div class="tab active" id="tabEditor">Editor</div>
-                <div class="tab" id="tabOutput">Output</div>
-            </div>
-            <div class="code-editor" id="editorPanel">
-                <textarea id="codeEditor" placeholder="Write your code here..."></textarea>
-            </div>
-            <div class="code-output" id="outputPanel" style="display: none;">
-                <pre id="outputArea"></pre>
-            </div>
-            <div class="editor-footer">
-                <button id="saveBtn" class="btn btn-secondary"><i class="fas fa-save"></i> Save</button>
-                <button id="runBtn" class="btn btn-primary"><i class="fas fa-play"></i> Run</button>
-            </div>
-        </div>
-    </main>
+        <main class="code-editor">
+            <textarea id="codeArea" placeholder="Write your code here..."></textarea>
+        </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2024 ProjectLang. All rights reserved.</p>
-    </footer>
-
-    <!-- Your JavaScript file -->
     <script src="script.js"></script>
 </body>
 </html>
