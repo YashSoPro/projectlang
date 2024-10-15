@@ -3,41 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Natural Language Coding: Transform your ideas into code effortlessly. Use plain English to write programs and see them come to life!">
-    <meta name="keywords" content="natural language programming, code generation, AI coding, easy programming">
-    <meta name="author" content="Your Name">
-    <title>Natural Language Coding | Code in Plain English</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://via.placeholder.com/32" sizes="32x32">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-domain.com/">
-    <meta property="og:title" content="Natural Language Coding | Code in Plain English">
-    <meta property="og:description" content="Transform your ideas into code effortlessly. Use plain English to write programs and see them come to life!">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://your-domain.com/">
-    <meta property="twitter:title" content="Natural Language Coding | Code in Plain English">
-    <meta property="twitter:description" content="Transform your ideas into code effortlessly. Use plain English to write programs and see them come to life!">
-    <meta property="twitter:image" content="https://via.placeholder.com/1200x630">
-
-    <!-- Styles -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Scripts -->
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <title>English to Java Translator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen">
-    <div id="root"></div>
-    <script src="app.js"></script>
+<body>
+    <header>
+        <h1>Welcome to ProjectLang</h1>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
+            <a href="feedback.html">Feedback</a>
+        </nav>
+        <button id="toggleDarkMode" aria-label="Toggle dark mode">Toggle Dark Mode</button>
+    </header>
+    <main>
+        <h2>Translate English to Java</h2>
+        <textarea id="englishInput" placeholder="Type your English command here..." aria-label="English command input"></textarea>
+        <button id="translateButton" aria-label="Translate button">Translate</button>
+        
+        <h3>Java Translation:</h3>
+        <pre id="javaOutput" aria-live="polite"></pre>
+        
+        <h2>Previous Translations</h2>
+        <ul id="historyList" aria-label="Translation history"></ul>
+
+        <h2>How to Use</h2>
+        <p>1. Type a command in English in the text area.</p>
+        <p>2. Click on "Translate" to see the Java equivalent.</p>
+        <p>3. Try different commands to explore translations!</p>
+    </main>
+    <footer>
+        <p>&copy; 2023 English to Java Translator</p>
+    </footer>
+    <script src="script.js"></script>
+    <script src="translate.js"></script>
 </body>
 </html>
