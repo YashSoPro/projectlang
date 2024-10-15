@@ -3,54 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code - ProjectLang</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Editor - ProjectLang</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <i class="fas fa-code"></i>
-                <h1>ProjectLang</h1>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="btn btn-secondary">Home</a>
-                <a href="#" id="loginBtn" class="btn btn-primary">Login</a>
-                <a href="#" id="signupBtn" class="btn btn-secondary">Sign Up</a>
-            </div>
-        </nav>
-    </header>
-    <main class="coding-interface">
-        <aside class="sidebar">
-            <h3>File Explorer</h3>
-            <ul>
-                <li>File1.txt</li>
-                <li>File2.txt</li>
-                <li>File3.txt</li>
+    <div class="editor-container">
+        <div class="sidebar">
+            <h3>Files</h3>
+            <ul id="fileList">
+                <!-- Files will be dynamically added here -->
             </ul>
-        </aside>
-        <div class="editor-container">
-            <div class="editor-tabs">
-                <div class="tab active">Editor</div>
-                <div class="tab">Output</div>
-            </div>
-            <div class="code-editor">
-                <textarea id="englishCode" placeholder="Write your code in plain English here..."></textarea>
-                <button id="translateBtn" class="btn btn-primary">Translate</button>
-                <pre id="javaCode"></pre>
-            </div>
-            <div class="output-panel">
-                <div class="panel-header">Output</div>
-                <pre id="outputArea"></pre>
-                <button id="runBtn" class="btn btn-secondary">Run Code</button>
-            </div>
+            <button id="addFileButton">+ Add File</button>
         </div>
-    </main>
-    <footer>
-        <p>ProjectLang - Programming made simple</p>
-        <p>&copy; 2024 ProjectLang. All rights reserved.</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
-</html>
+
+        <div class="editor-panel">
+            <h3 id="currentFileName">Select a file to start coding</h3>
+           
