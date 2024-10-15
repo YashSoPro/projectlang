@@ -1,13 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Elements
-    const loginBtn = document.getElementById('loginBtn');
-    const signupBtn = document.getElementById('signupBtn');
-    const loginModal = document.getElementById('loginModal');
-    const signupModal = document.getElementById('signupModal');
-    const closeBtns = document.getElementsByClassName('close');
     const fileList = document.getElementById('fileList');
     const newFileBtn = document.getElementById('newFileBtn');
-    const newFolderBtn = document.getElementById('newFolderBtn');
     const codeEditor = document.getElementById('codeEditor');
     const saveBtn = document.getElementById('saveBtn');
     const runBtn = document.getElementById('runBtn');
@@ -20,32 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let files = {};
     let currentFile = null;
 
-    // Modal functionality
-    loginBtn.onclick = () => loginModal.style.display = 'block';
-    signupBtn.onclick = () => signupModal.style.display = 'block';
-
-    Array.from(closeBtns).forEach(btn => {
-        btn.onclick = () => {
-            loginModal.style.display = 'none';
-            signupModal.style.display = 'none';
-        };
-    });
-
-    window.onclick = (event) => {
-        if (event.target == loginModal) loginModal.style.display = 'none';
-        if (event.target == signupModal) signupModal.style.display = 'none';
-    };
-
     // File Management
     newFileBtn.onclick = () => {
-        const fileName = prompt('Enter new file name (include extension):');
-        if (fileName) {
-            if (files[fileName]) {
-                alert('File already exists!');
-            } else {
+        const fileType = prompt("Choose file type: 'struct' for Structure, 'style' for Style, or 'logic' for Logic.");
+        if (fileType === 'struct' || fileType === 'style' || fileType === 'logic') {
+            const fileName = prompt(`Enter new ${fileType} file name (e.g., layout.struct, design.style, behavior.logic):`);
+            if (fileName && !files[fileName]) {
                 files[fileName] = '';
                 renderFileList();
+            } else {
+                alert('File name already exists or is invalid.');
             }
+        } else {
+            alert('Invalid file type.');
         }
     };
 
@@ -104,25 +85,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Run Code
     runBtn.onclick = () => {
-        if (currentFile) {
-            const fileExtension = currentFile.split('.').pop();
-            let code = codeEditor.value;
-            if (fileExtension === 'html') {
-                outputArea.innerHTML = code;
-            } else if (fileExtension === 'js') {
-                try {
-                    outputArea.innerHTML = '';
-                    eval(code);
-                } catch (error) {
-                    outputArea.innerHTML = error;
-                }
-            } else {
-                outputArea.textContent = code;
+        // Gather content from all files based on their type
+        let structureContent = '';
+        let styleContent = '';
+        let logicContent = '';
+
+        for (let fileName in files) {
+            if (fileName.endsWith('.struct')) {
+                structureContent += files[fileName] + '\n';
+            } else if (fileName.endsWith('.style')) {
+                styleContent += files[fileName] + '\n';
+            } else if (fileName.endsWith('.logic')) {
+                logicContent += files[fileName] + '\n';
             }
-            switchToOutput();
-        } else {
-            alert('No file selected!');
         }
+
+        // Simulate the processing of the custom language system
+        const combinedOutput = `Structure:\n${structureContent}\nStyles:\n${styleContent}\nLogic:\n${logicContent}`;
+        outputArea.textContent = combinedOutput;
+        switchToOutput();
     };
 
     // Tab Switching
