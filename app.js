@@ -6,18 +6,31 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Initialize GSAP animations
     gsap.from("#header", { duration: 1, y: -50, opacity: 0, ease: "power3.out" });
     gsap.from("#main-content", { duration: 1, scale: 0.8, opacity: 0, delay: 0.5, ease: "back.out(1.7)" });
+
+    // Load dark mode preference
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    }
   }, []);
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
+    setError(''); // Clear error message
   };
 
   const handleSubmit = async () => {
+    if (!input.trim()) {
+      setError('Input cannot be empty.');
+      return;
+    }
+    
     try {
       const response = await fetch('/api/process', {
         method: 'POST',
@@ -26,6 +39,9 @@ const App = () => {
         },
         body: JSON.stringify({ input }),
       });
+      
+      if (!response.ok) throw new Error('Network response was not ok');
+      
       const data = await response.json();
       setOutput(data.output);
       
@@ -33,7 +49,13 @@ const App = () => {
       gsap.from("#output", { duration: 0.5, y: 20, opacity: 0, ease: "power2.out" });
     } catch (error) {
       console.error('Error:', error);
+      setError('Failed to process the input. Please try again later.');
     }
+  };
+
+  const toggleDarkMode = () => {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
   };
 
   return React.createElement(
@@ -88,6 +110,7 @@ const App = () => {
               React.createElement('i', { className: 'fas fa-code mr-2' }),
               'Process Code'
             ),
+            error && React.createElement('p', { className: 'text-red-500 mt-2' }, error),
             React.createElement('pre', { 
               id: 'output',
               className: 'mt-6 p-4 bg-gray-800 text-green-400 rounded-lg overflow-x-auto'
