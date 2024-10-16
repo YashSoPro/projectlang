@@ -4,41 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProjectLang - English to Java Translator</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Array of random messages
+        const messages = [
+            "Welcome to ProjectLang! Translate your commands effortlessly.",
+            "Ready to translate? Enter your command and click Translate!",
+            "Discover the power of coding with our easy translator!",
+            "Let's convert your English commands to Java!",
+            "Get started with your translations now!",
+            "Unleash your coding potential with ProjectLang!"
+        ];
+
+        // Function to display a random message
+        function displayRandomMessage() {
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const messageContainer = document.getElementById('random-message');
+            messageContainer.textContent = messages[randomIndex];
+        }
+
+        // Call the function on page load
+        window.onload = displayRandomMessage;
+    </script>
 </head>
 <body>
     <header>
         <h1>Welcome to ProjectLang</h1>
         <nav>
-            <a href="login.html">Login</a>
-            <a href="signup.html">Sign Up</a>
-            <a href="feedback.html">Feedback</a>
+            <a href="#">Login</a>
+            <a href="#">Sign Up</a>
+            <a href="#">Feedback</a>
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
         </nav>
-        <button id="toggleDarkMode" aria-label="Toggle dark mode">Toggle Dark Mode</button>
     </header>
     <main>
-        <h2>Translate English to Java</h2>
-        <textarea id="englishInput" placeholder="Type your English command here..." aria-label="English command input"></textarea>
-        <button id="translateButton" aria-label="Translate button">Translate</button>
-        
-        <h3>Java Translation:</h3>
-        <pre id="javaOutput" aria-live="polite"></pre>
-        
-        <h2>Previous Translations</h2>
-        <ul id="historyList" aria-label="Translation history"></ul>
-
-        <h2>How to Use</h2>
-        <ol>
-            <li>Type a command in English in the text area.</li>
-            <li>Click on "Translate" to see the Java equivalent.</li>
-            <li>Try different commands to explore translations!</li>
-        </ol>
+        <section>
+            <h2>Translate English to Java</h2>
+            <textarea id="command-input" placeholder="Type your English command here..."></textarea>
+            <button id="translate-button">Translate</button>
+            <p id="java-translation">Java Translation:</p>
+        </section>
+        <section>
+            <h3>Random Message:</h3>
+            <p id="random-message"></p>
+        </section>
+        <section>
+            <h3>Previous Translations</h3>
+            <!-- Previous translations will be listed here -->
+        </section>
+        <section>
+            <h3>How to Use</h3>
+            <ol>
+                <li>Type a command in English in the text area.</li>
+                <li>Click on "Translate" to see the Java equivalent.</li>
+                <li>Try different commands to explore translations!</li>
+            </ol>
+        </section>
     </main>
     <footer>
         <p>&copy; 2023 ProjectLang - English to Java Translator</p>
     </footer>
-    <script src="script.js"></script>
-    <script src="translate.js"></script>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
