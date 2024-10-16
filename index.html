@@ -3,25 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProjectLang - Home</title>
+    <title>ProjectLang - Your Custom Programming Language</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        // Dark mode functionality
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const darkModeEnabled = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', darkModeEnabled);
-        }
-
-        function loadDarkMode() {
-            const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-            if (darkModeEnabled) {
-                document.body.classList.add('dark-mode');
-            }
-        }
-
-        window.onload = loadDarkMode;
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
 </head>
 <body>
     <header>
@@ -29,34 +14,36 @@
         <nav>
             <a href="login.html">Login</a>
             <a href="signup.html">Sign Up</a>
+            <a href="#">Feedback</a>
             <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
         </nav>
     </header>
     <main>
-        <section id="description">
-            <h2>What is ProjectLang?</h2>
-            <p>ProjectLang is an innovative platform designed to help users learn programming by translating natural language instructions into Java code. Our goal is to make coding accessible and intuitive for everyone!</p>
+        <section>
+            <h2>About ProjectLang</h2>
+            <p>ProjectLang is a unique programming language designed to simplify coding through natural language processing. With ProjectLang, you can translate your commands into executable code effortlessly.</p>
+            <h3>How It Works:</h3>
+            <ol>
+                <li>Input your commands in natural language.</li>
+                <li>Use the editor to create files with a .dumb extension.</li>
+                <li>Compile and run your code seamlessly.</li>
+            </ol>
+            <button id="start-editor-button">Open Editor</button>
         </section>
-        
-        <section id="features">
-            <h2>Features</h2>
-            <ul>
-                <li><i class="fas fa-code"></i> Intuitive Language Translation</li>
-                <li><i class="fas fa-file-code"></i> File Management System</li>
-                <li><i class="fas fa-user-graduate"></i> User-Friendly Interface</li>
-                <li><i class="fas fa-lightbulb"></i> Learning Resources</li>
-            </ul>
-        </section>
-
-        <section id="random-message">
-            <h2>Get Started</h2>
-            <p>Ready to start coding? Join us today and unlock the power of programming!</p>
+        <section id="editor" style="display: none;">
+            <h3>Code Editor</h3>
+            <textarea id="code" placeholder="Write your ProjectLang code here..."></textarea>
+            <button id="save-file">Save File</button>
+            <div id="file-management">
+                <h4>Files</h4>
+                <ul id="file-list"></ul>
+                <button id="new-file">New File</button>
+            </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 ProjectLang - English to Java Translator</p>
+        <p>&copy; 2023 ProjectLang - Your Custom Programming Language</p>
     </footer>
     <script src="script.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
