@@ -1,43 +1,147 @@
+/* General styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     color: #333;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Dark mode styling */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Header styling */
 header {
     background-color: #343a40;
     color: white;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
+/* Navbar links */
 nav a {
     color: white;
-    margin: 0 10px;
+    margin: 0 15px;
     text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
 }
 
+/* Navbar hover effect */
+nav a:hover {
+    color: #ffcc00;
+}
+
+/* Main content styling */
 main {
-    padding: 20px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
+/* Textarea styling */
 textarea {
     width: 100%;
-    height: 100px;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid #343a40;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+    transition: border-color 0.3s ease;
 }
 
+/* Textarea focus effect */
+textarea:focus {
+    border-color: #ffcc00;
+    outline: none;
+}
+
+/* Button styling */
 button {
-    margin-top: 10px;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #343a40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
+/* Button hover effect */
+button:hover {
+    background-color: #ffcc00;
+    color: #343a40;
+}
+
+/* Footer styling */
 footer {
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     background-color: #343a40;
     color: white;
     position: relative;
     bottom: 0;
     width: 100%;
+    font-size: 14px;
+}
+
+/* Dark mode footer adjustment */
+body.dark-mode footer {
+    background-color: #1a1a1a;
+}
+
+/* Random message section */
+#random-message {
+    font-style: italic;
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+/* Translation output styling */
+#translation-output {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#translation-output pre {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+    overflow-x: auto;
+}
+
+/* Responsive styling for smaller devices */
+@media (max-width: 768px) {
+    header {
+        text-align: left;
+        padding: 10px;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    textarea {
+        height: 100px;
+    }
 }
