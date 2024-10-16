@@ -1,20 +1,22 @@
-document.getElementById("translateButton").addEventListener("click", function() {
-    const input = document.getElementById("englishInput").value;
-    const output = translateToJava(input);
-    document.getElementById("javaOutput").textContent = output;
+const translations = {
+    "print": "System.out.println()",
+    "declare variable": "int x;",
+    "if statement": "if (condition) {}",
+    // Add more translations as needed
+};
 
-    // Save to history
-    saveToHistory(input, output);
+document.getElementById('translateButton').addEventListener('click', function() {
+    const command = document.getElementById('commandInput').value.toLowerCase();
+    const javaTranslation = translations[command] || "Translation not found.";
+    document.getElementById('javaOutput').innerText = javaTranslation;
+
+    // Update previous translations
+    const historyItem = document.createElement('li');
+    historyItem.textContent = `${command} => ${javaTranslation}`;
+    document.getElementById('translationHistory').appendChild(historyItem);
 });
 
-document.getElementById("toggleDarkMode").addEventListener("click", function() {
-    document.body.classList.toggle("dark-mode");
+// Toggle dark mode
+document.getElementById('toggle-dark-mode').addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
 });
-
-// Save translation to history
-function saveToHistory(input, output) {
-    const historyList = document.getElementById("historyList");
-    const li = document.createElement("li");
-    li.textContent = `${input} → ${output}`;
-    historyList.appendChild(li);
-}
