@@ -26,7 +26,7 @@ header {
 }
 
 /* Navbar links */
-nav a {
+nav a, nav button {
     color: white;
     margin: 0 15px;
     text-decoration: none;
@@ -35,7 +35,7 @@ nav a {
 }
 
 /* Navbar hover effect */
-nav a:hover {
+nav a:hover, nav button:hover {
     color: #ffcc00;
 }
 
@@ -46,20 +46,19 @@ main {
     margin: 0 auto;
 }
 
-/* Textarea styling */
-textarea {
+/* Form input styling */
+input {
     width: 100%;
-    height: 150px;
     padding: 10px;
+    margin: 10px 0;
     border: 2px solid #343a40;
     border-radius: 5px;
     font-size: 16px;
-    resize: none;
     transition: border-color 0.3s ease;
 }
 
-/* Textarea focus effect */
-textarea:focus {
+/* Input focus effect */
+input:focus {
     border-color: #ffcc00;
     outline: none;
 }
@@ -121,27 +120,5 @@ body.dark-mode footer {
     background-color: #e9ecef;
     padding: 15px;
     border-radius: 5px;
-    font-family: "Courier New", monospace;
     overflow-x: auto;
-}
-
-/* Responsive styling for smaller devices */
-@media (max-width: 768px) {
-    header {
-        text-align: left;
-        padding: 10px;
-    }
-
-    nav a {
-        display: block;
-        margin: 10px 0;
-    }
-
-    main {
-        padding: 20px;
-    }
-
-    textarea {
-        height: 100px;
-    }
 }
