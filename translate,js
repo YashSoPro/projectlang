@@ -1,22 +1,65 @@
 function translateToJava(input) {
     let javaCode = '';
-    input = input.toLowerCase();
+    input = input.toLowerCase().trim();
 
+    // Handle conditional statements
     if (input.includes("if") && input.includes("then")) {
         const condition = input.split("then")[0].replace("if", "").trim();
         const action = input.split("then")[1].trim();
-        javaCode += `if (${condition}) {\n\tSystem.out.println("${action.replace(/'/g, '\\"')}");\n}`;
-    } else if (input.includes("print")) {
+        javaCode += `if (${translateCondition(condition)}) {\n\t${translateAction(action)}\n}`;
+    }
+    // Handle print statements
+    else if (input.includes("print")) {
         const message = input.replace("print", "").trim().replace(/'/g, '\\"');
         javaCode += `System.out.println("${message}");`;
-    } else if (input.includes("equals")) {
+    }
+    // Handle equality checks
+    else if (input.includes("equals")) {
         const parts = input.split("equals");
         const left = parts[0].trim();
-        const right = parts[1].replace("four", "4").trim();
+        const right = translateMath(parts[1].trim());
         javaCode += `if (${left} == ${right}) {\n\tSystem.out.println("You are a mathematician");\n} else {\n\tSystem.out.println("You need practice");\n}`;
-    } else {
+    }
+    // Handle arithmetic operations
+    else if (containsArithmetic(input)) {
+        javaCode += `int result = ${translateMath(input)};\nSystem.out.println("Result: " + result);`;
+    }
+    else {
         javaCode = "Translation not available for this input.";
     }
 
     return javaCode;
+}
+
+// Helper function to translate conditions like comparisons
+function translateCondition(condition) {
+    condition = condition.replace("is greater than", ">")
+                         .replace("is less than", "<")
+                         .replace("equals", "==")
+                         .replace("is not", "!=");
+    return condition;
+}
+
+// Helper function to translate actions
+function translateAction(action) {
+    if (action.includes("print")) {
+        const message = action.replace("print", "").trim().replace(/'/g, '\\"');
+        return `System.out.println("${message}");`;
+    }
+    return action; // If it's something else like setting a variable, etc.
+}
+
+// Helper function to translate arithmetic expressions
+function translateMath(expression) {
+    expression = expression.replace("plus", "+")
+                           .replace("minus", "-")
+                           .replace("times", "*")
+                           .replace("divided by", "/");
+    return expression;
+}
+
+// Helper function to check if input contains arithmetic
+function containsArithmetic(input) {
+    return input.includes("plus") || input.includes("minus") || 
+           input.includes("times") || input.includes("divided by");
 }
