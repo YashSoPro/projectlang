@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectLang - Code Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Initialize file system
+        let fileSystem = [];
+
+        // Function to create a file
+        function createFile(name) {
+            fileSystem.push({ name, content: '' });
+            updateFileList();
+        }
+
+        // Function to delete a file
+        function deleteFile(index) {
+            fileSystem.splice(index, 1);
+            updateFileList();
+        }
+
+        // Function to rename a file
+        function renameFile(index, newName) {
+            fileSystem[index].name = newName;
+            updateFileList();
+        }
+
+        // Function to update the file list display
+        function updateFileList() {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+            fileSystem.forEach((file, index) => {
+                fileList.innerHTML += `
+                    <li>
+                        ${file.name}
+                        <button onclick="deleteFile(${index})">Delete</button>
+                        <button onclick="openFile(${index})">Open</button>
+                    </li>
+                `;
+            });
+        }
+
+        // Function to open a file
+        function openFile(index) {
+            const content = prompt("Edit file content:", fileSystem[index].content);
+            if (content !== null) {
+                fileSystem[index].content = content;
+            }
+            updateFileList();
+        }
+
+        // Function to handle new file creation
+        function handleNewFile() {
+            const fileName = prompt("Enter file name:");
+            if (fileName) {
+                createFile(fileName);
+            }
+        }
+
+        // Load dark mode on startup
+        window.onload = loadDarkMode;
+
+        // Include toggle dark mode and load dark mode functions from previous pages
+    </script>
+</head>
+<body>
+    <header>
+        <h1>ProjectLang Code Editor</h1>
+        <nav>
+            <button onclick="handleNewFile()">New File</button>
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </nav>
+    </header>
+    <main>
+        <h2>Files</h2>
+        <ul id="file-list"></ul>
+    </main>
+    <footer>
+        <p>&copy; 2023 ProjectLang - English to Java Translator</p>
+    </footer>
+</body>
+</html>
